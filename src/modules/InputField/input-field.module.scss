@@ -1,0 +1,14 @@
+@use '@styles/variables' as *;
+
+.input-field {
+  &__input-text {
+    display: inline-block;
+    width: 100%;
+    padding: $space-s;
+    margin-bottom: $space-s;
+  }
+  &__error-text {
+    color: red;
+    font-size: small;
+  }
+}
