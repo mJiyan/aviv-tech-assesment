@@ -26,19 +26,20 @@ export const getPropertyList = () => async (dispatch: Dispatch<GetPropertyListDi
         dispatch({ type: GET_PROPERTY_LIST_LOADING });
 
         const { data } = await apiCall(
-            {
-                url: `${PROPERTY_API_END_POINT}/listings`,
-                data: null,
-                params: null,
-                method: HTTP.GET,
-                headers: {}
-            }
+          {
+              url: `${PROPERTY_API_END_POINT}/listings`,
+              data: null,
+              params: null,
+              method: HTTP.GET,
+              headers: {}
+          }
         )
-            console.log("GETPROPERTYLOST")
-        dispatch({
+        dispatch(
+          {
             type: GET_PROPERTY_LIST_SUCCESS,
             payload: data,
-          });
+          }
+        );
     } catch (e) {
         const error = e as Error | AxiosError;
 

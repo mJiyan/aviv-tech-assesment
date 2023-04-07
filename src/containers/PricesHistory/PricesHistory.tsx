@@ -1,18 +1,18 @@
 import { useParams } from 'react-router-dom';
 
 import PricesHistoryCard from '@components/PriceHistoryCard';
+import { useGetPricesHistory } from '@/hooks';
 
 import styles from './prices-history.module.scss';
-import { useGetPricesHistory } from '@/hooks';
 
 const PricesHistory = () => {
   const { propertyId } = useParams();
-  const stateResult = useGetPricesHistory(propertyId as string);
+  const propertyPrices = useGetPricesHistory(propertyId as string);
 
   return (
     <div className={styles['container']}>
       <h1>Prices History</h1>
-      {stateResult?.propertyPrices && stateResult.propertyPrices.map((propertyPricesPrice) => (
+      {propertyPrices && propertyPrices.map((propertyPricesPrice) => (
         <PricesHistoryCard 
           created_date={propertyPricesPrice.created_date} 
           price_eur={propertyPricesPrice.price_eur} 

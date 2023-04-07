@@ -5,7 +5,7 @@ import { useGetPropertyList } from '@/hooks';
 import styles from './listings.module.scss';
 
 const Listings = () => {
-  const stateResult = useGetPropertyList();
+  const properties = useGetPropertyList();
   
   return (
     <main className={styles['listings']}>
@@ -20,7 +20,7 @@ const Listings = () => {
         <section className={styles['listings__section']}>
           <h2 className={styles['listings__sub-title']}>Listings</h2>
           <div className={styles['listings__items']}>
-          {stateResult.properties ? stateResult.properties.map((property) => (
+          {properties ? properties.map((property) => (
             <ListingCard 
               key={property.id}
               id={property.id}

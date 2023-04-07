@@ -1,22 +1,24 @@
 import { useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { Maybe } from "@/types"
+import { GetPropertyListResultType } from '@/redux/actions/Property/types';
 import { RootStore } from "@/Store";
 import { getPropertyList } from '@/redux/actions';
 
-const useGetPropertyList = () => {
-    const loading = useRef(false);
+const useGetPropertyList = (): Maybe<GetPropertyListResultType> => {
+    const isLoading = useRef(false);
 
     const dispatch = useDispatch();
     
-    const stateResult = useSelector((state: RootStore) => state.property);
+    const { properties, property, loading } = useSelector((state: RootStore) => state.property);
   
     useEffect(() => {
       dispatch(getPropertyList());
-      loading.current = stateResult.loading;
-  }, [loading.current, stateResult.property]);
+      isLoading.current = loading;
+  }, [isLoading.current, property]);
 
-  return stateResult
+  return properties
 }
 
 export default useGetPropertyList
