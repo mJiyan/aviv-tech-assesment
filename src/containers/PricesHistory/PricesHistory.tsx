@@ -1,27 +1,13 @@
-import { useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { RootStore } from "@/Store";
 import PricesHistoryCard from '@components/PriceHistoryCard';
-import { getPropertyPriceInformation } from '@/redux/actions';
 
 import styles from './prices-history.module.scss';
+import { useGetPricesHistory } from '@/hooks';
 
 const PricesHistory = () => {
-
   const { propertyId } = useParams();
-
-  const loading = useRef(false);
-
-  const dispatch = useDispatch();
-  
-  const stateResult = useSelector((state: RootStore) => state.property);
-
-  useEffect(() => {
-    dispatch(getPropertyPriceInformation(propertyId as string));
-    loading.current = stateResult.loading;
-}, [loading.current]);
+  const stateResult = useGetPricesHistory(propertyId as string);
 
   return (
     <div className={styles['container']}>

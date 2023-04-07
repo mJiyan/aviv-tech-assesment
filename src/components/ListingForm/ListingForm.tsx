@@ -1,56 +1,20 @@
-import { useDispatch } from 'react-redux';
 import { Formik, Form, Field, FormikHelpers } from 'formik';
 
 import { initialValues } from '@/const';
-import { addProperty, UpdateData } from '@/redux/actions';
+import { UpdateData } from '@/redux/actions';
 import { InputField } from "@/modules/InputField/"
 import { formikObjectSchema } from '@/utils';
+import { useAddProperty } from '@/hooks';
 
 import styles from './listing-form.module.scss';
 
 export type SubmitFormValues = Omit<UpdateData, "created_date">
 
-type SubmitProps = ((values: SubmitFormValues, formikHelpers: FormikHelpers<SubmitFormValues>) => void | Promise<SubmitFormValues>) & ((submitedValues: SubmitFormValues) => void)
+export type SubmitProps = ((values: SubmitFormValues, formikHelpers: FormikHelpers<SubmitFormValues>) => void | Promise<SubmitFormValues>) & ((submitedValues: SubmitFormValues) => void)
 
 const ListingForm = () => {
-  const dispatch = useDispatch();
 
-  const submit: SubmitProps = (
-    {
-      latest_price_eur,  
-      surface_area_m2,  
-      building_type,
-      postal_address: {
-        city,
-        street_address,
-        postal_code,
-        country
-      },
-      contact_phone_number,
-      rooms_count,
-      bedrooms_count,
-      name,
-      description,
-    }
-  ) => {
-    dispatch(addProperty({
-        latest_price_eur: Number(latest_price_eur),
-        surface_area_m2: Number(surface_area_m2),
-        building_type,
-        postal_address: {
-          street_address,
-          city,
-          postal_code,
-          country
-        },
-        name,
-        bedrooms_count,
-        rooms_count,
-        created_date: String(new Date()),
-        contact_phone_number,
-        description
-     }))
-  }
+  const submit = useAddProperty();
 
   return (
     <Formik
