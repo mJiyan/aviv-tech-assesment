@@ -23,8 +23,7 @@ const ListingCard = ({
   },
   description,
   updated_date,
-}: ListingCardProps) => {
-  return(
+}: ListingCardProps) => (
     <article className={styles['listing-card']}>
       <span className={styles['listing-card__price']}>{localizedPriceInformation(latest_price_eur)} €</span>
       <ul className={styles['listing-card__properties']}>
@@ -53,6 +52,6 @@ const ListingCard = ({
         </a>
       </div>
     </article>
-  )};
+  )
 
 export default ListingCard;

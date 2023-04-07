@@ -4,7 +4,6 @@ import { initialValues } from '@/const';
 import { UpdateData } from '@/redux/actions';
 import { InputField } from "@/modules/InputField/"
 import { formikObjectSchema } from '@/utils';
-import { useAddProperty } from '@/hooks';
 
 import styles from './listing-form.module.scss';
 
@@ -12,17 +11,12 @@ export type SubmitFormValues = Omit<UpdateData, "created_date">
 
 export type SubmitProps = ((values: SubmitFormValues, formikHelpers: FormikHelpers<SubmitFormValues>) => void | Promise<SubmitFormValues>) & ((submitedValues: SubmitFormValues) => void)
 
-const ListingForm = () => {
-
-  const submit = useAddProperty();
-
-  return (
+const ListingForm = ({ submit }: { submit: SubmitProps }) =>  (
     <Formik
       initialValues={initialValues}
-      onSubmit={(values, { setSubmitting, resetForm }) => {
+      onSubmit={(values, { resetForm }) => {
         submit(values);
         resetForm({});
-        setSubmitting(false);
        }}
       validationSchema={formikObjectSchema()}
     >
@@ -77,6 +71,5 @@ const ListingForm = () => {
        )}
     </Formik>
   );
-};
 
 export default ListingForm;

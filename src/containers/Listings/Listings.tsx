@@ -1,11 +1,12 @@
 import ListingCard from '@components/ListingCard';
 import ListingForm from '@components/ListingForm';
-import { useGetPropertyList } from '@/hooks';
+import { useAddProperty, useGetPropertyList } from '@/hooks';
 
 import styles from './listings.module.scss';
 
 const Listings = () => {
   const properties = useGetPropertyList();
+  const submit = useAddProperty();
   
   return (
     <main className={styles['listings']}>
@@ -14,7 +15,7 @@ const Listings = () => {
         <aside className={styles['listings__aside']}>
           <h2 className={styles['listings__sub-title']}>Add a listing</h2>
           <div className={styles['listings__form']}>
-            <ListingForm />
+            <ListingForm submit={submit} />
           </div>
         </aside>
         <section className={styles['listings__section']}>
